@@ -1,132 +1,174 @@
 import {Component} from 'react'
-import Cookies from 'js-cookie'
 import {Redirect} from 'react-router-dom'
-
+import Cookies from 'js-cookie'
 import './index.css'
 
-class LoginForm extends Component {
+class Login extends Component {
   state = {
     username: '',
     password: '',
     showSubmitError: false,
     errorMsg: '',
+    whoami: '',
+    popupVisible: false,
   }
 
-  onChangeUsername = event => {
-    this.setState({username: event.target.value})
+  loginFormPatient = () => {
+    this.setState({whoami: 'Patient', popupVisible: true})
   }
 
-  onChangePassword = event => {
-    this.setState({password: event.target.value})
+  loginFormCaretaker = () => {
+    this.setState({whoami: 'Caretaker', popupVisible: true})
   }
 
-  onSubmitSuccess = jwtToken => {
+  submitForm = async e => {
+    e.preventDefault()
+    const {username, password} = this.state
+    if (username === 'ashish' && password === 'ashish') {
+      this.onSubmitSuccess()
+    } else {
+      this.onSubmitFailure()
+    }
+  }
+
+  onSubmitSuccess = () => {
+    const {username, password, whoami} = this.state
     const {history} = this.props
-
-    Cookies.set('jwt_token', jwtToken, {
-      expires: 30,
-    })
+    const jwtToken = {username, password}
+    Cookies.set('jwt_token', jwtToken, {expires: 10})
+    const cookiesKey = Cookies.get('jwt_token')
+    localStorage.setItem('jwt_cookie', JSON.stringify(cookiesKey))
+    localStorage.setItem('whoami', whoami)
     history.replace('/')
   }
 
-  onSubmitFailure = errorMsg => {
-    this.setState({showSubmitError: true, errorMsg})
-  }
-
-  submitForm = async event => {
-    event.preventDefault()
-    const {username, password} = this.state
-    const userDetails = {username, password}
-    const url = 'https://apis.ccbp.in/login'
-    const options = {
-      method: 'POST',
-      body: JSON.stringify(userDetails),
-    }
-    const response = await fetch(url, options)
-    const data = await response.json()
-    if (response.ok === true) {
-      this.onSubmitSuccess(data.jwt_token)
-    } else {
-      this.onSubmitFailure(data.error_msg)
-    }
-  }
-
-  renderPasswordField = () => {
-    const {password} = this.state
-
-    return (
-      <>
-        <label className="input-label" htmlFor="password">
-          PASSWORD
-        </label>
-        <input
-          type="password"
-          id="password"
-          className="password-input-field"
-          value={password}
-          onChange={this.onChangePassword}
-          placeholder="Password"
-        />
-      </>
-    )
-  }
-
-  renderUsernameField = () => {
-    const {username} = this.state
-
-    return (
-      <>
-        <label className="input-label" htmlFor="username">
-          USERNAME
-        </label>
-        <input
-          type="text"
-          id="username"
-          className="username-input-field"
-          value={username}
-          onChange={this.onChangeUsername}
-          placeholder="Username"
-        />
-      </>
-    )
+  onSubmitFailure = () => {
+    this.setState({showSubmitError: true, errorMsg: 'enter valid input'})
   }
 
   render() {
-    const {showSubmitError, errorMsg} = this.state
+    const {
+      username,
+      password,
+      showSubmitError,
+      errorMsg,
+      popupVisible,
+      whoami,
+    } = this.state
     const jwtToken = Cookies.get('jwt_token')
 
     if (jwtToken !== undefined) {
-      return <Redirect to="/" />
+      return <Redirect to="/login" />
     }
 
     return (
-      <div className="login-form-container">
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-          className="login-website-logo-mobile-img"
-          alt="website logo"
-        />
-        <img
-          src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-login-img.png"
-          className="login-img"
-          alt="website login"
-        />
-        <form className="form-container" onSubmit={this.submitForm}>
+      <div className="login-home-container">
+        <div className="login-home-head">
           <img
-            src="https://assets.ccbp.in/frontend/react-js/nxt-trendz-logo-img.png"
-            className="login-website-logo-desktop-img"
-            alt="website logo"
+            className="login-home-logo"
+            src="/heart-Bj9ZTo3Y.svg"
+            alt="MediCare Companion Logo"
           />
-          <div className="input-container">{this.renderUsernameField()}</div>
-          <div className="input-container">{this.renderPasswordField()}</div>
-          <button type="submit" className="login-button">
-            Login
-          </button>
-          {showSubmitError && <p className="error-message">*{errorMsg}</p>}
-        </form>
+          <h1 className="heading-loginHome">Welcome to MediCare Companion</h1>
+          <p className="para-loginHome">
+            Your trusted partner in medication management. Choose your role to
+            get started with personalized features.
+          </p>
+        </div>
+        <div className="login-home-body">
+          <div className="login-home-body-left">
+            <img
+              className="login-home-logo"
+              src="/user_3237472.png"
+              alt="MediCare Companion Logo"
+            />
+            <h2>I`m a Patient</h2>
+            <p>
+              Track your medication schedule and maintain your health records
+            </p>
+            <div className="login-home-ul">
+              <ul>
+                <li>Mark medications as taken</li>
+                <li>Upload proof photos (optional)</li>
+                <li>View your medication calendar</li>
+                <li>Large, easy-to-use interface</li>
+              </ul>
+            </div>
+            <button
+              className="login-home-Patient"
+              type="button"
+              onClick={this.loginFormPatient}
+            >
+              Continue as Patient
+            </button>
+          </div>
+          <div className="login-home-body-right">
+            <img
+              className="login-home-logo"
+              src="/user_13078032.png"
+              alt="MediCare Companion Logo"
+            />
+            <h2>I`m a Caretaker</h2>
+            <p>Monitor and support your loved ones medication adherence</p>
+            <div className="login-home-ul-right">
+              <ul>
+                <li>Monitor medication compliance</li>
+                <li>Set up notification preferences</li>
+                <li>View detailed reports</li>
+                <li>Receive email alerts</li>
+              </ul>
+            </div>
+            <button
+              className="login-home-Caretaker"
+              type="button"
+              onClick={this.loginFormCaretaker}
+            >
+              Continue as Caretaker
+            </button>
+          </div>
+        </div>
+        <p>You can switch between roles anytime after setup</p>
+        {popupVisible && (
+          <div className="popup">
+            <h2>Login as {whoami}</h2>
+            <form onSubmit={this.submitForm}>
+              <div className="login-inputs">
+                <label htmlFor="username">Username:</label>
+                <input
+                  type="text"
+                  id="username"
+                  placeholder="ashish"
+                  value={username}
+                  onChange={e => this.setState({username: e.target.value})}
+                />
+                <label htmlFor="password">Password:</label>
+                <input
+                  type="password"
+                  id="password"
+                  placeholder="ashish"
+                  value={password}
+                  onChange={e => this.setState({password: e.target.value})}
+                />
+              </div>
+              <div className="login-btns">
+                <button type="submit" className="login-btn">
+                  Login
+                </button>
+                <button
+                  className="close-popup"
+                  type="button"
+                  onClick={() => this.setState({popupVisible: false})}
+                >
+                  Close
+                </button>
+              </div>
+            </form>
+            {showSubmitError && <p className="error-message">*{errorMsg}</p>}
+          </div>
+        )}
       </div>
     )
   }
 }
 
-export default LoginForm
+export default Login

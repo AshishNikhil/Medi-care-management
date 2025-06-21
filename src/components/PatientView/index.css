@@ -1,0 +1,209 @@
+@import url('https://cdn.syncfusion.com/ej2/material.css');
+
+.PatientView-container {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.first-container {
+  background: linear-gradient(90deg, #3b83f4 0%, #22c460 80%);
+  width: 50%;
+  border-radius: 12px;
+  display: flex;
+  flex-direction: column;
+  padding: 28px;
+}
+
+.inside-first-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+}
+
+.PatientView-logo {
+  margin-top: 26px;
+  margin-right: 22px;
+  width: 80px;
+  height: 80px;
+}
+
+.inside-first-container-heading {
+  color: white;
+  font-weight: bold;
+}
+
+.inside-first-container-para {
+  color: white;
+}
+
+.PatientView-rows {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.mini-PatientView-update {
+  background-color: rgba(196, 196, 196, 0.3);
+  display: block;
+  border-radius: 12px;
+  padding: 12px;
+  width: 400px;
+}
+
+.mini-PatientView-update h1 {
+  color: rgb(255, 255, 255);
+  font-size: 28px;
+}
+
+.mini-PatientView-update p {
+  color: rgb(255, 255, 255);
+  font-size: 18px;
+}
+
+.sec-container {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  margin: 2rem;
+}
+
+.sec-container-left {
+  margin-right: 3.5rem;
+  padding: 22px;
+  background-color: white;
+  border-radius: 12px;
+  width: 550px;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 2px 2px 8px 1px rgba(189, 189, 189, 0.75);
+}
+
+.sec-container-left h1 {
+  font-size: 22px;
+}
+
+.sec-container-left-one {
+  display: flex;
+  flex-direction: row;
+  justify-content: flex-start;
+  align-items: center;
+  border: 1px solid rgb(206, 206, 206);
+  border-radius: 12px;
+  padding: 20px;
+}
+
+.sec-container-left-one h2 {
+  background-color: #75a7f7;
+  border-radius: 130px;
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  font-size: 22px;
+  color: #4088fd;
+  padding-top: 10px;
+  margin-right: 2rem;
+}
+
+.sec-container-left-one h1 {
+  font-size: 22px;
+}
+
+.sec-container-left-one-p {
+  color: #a1a1a1;
+}
+
+.sec-container-left-one-time {
+  padding: 4px;
+  border-radius: 12px;
+  width: 110px;
+  height: 30px;
+  text-align: center;
+  font-size: 16px;
+  margin-left: 2.9rem;
+  border: 1px solid rgb(206, 206, 206);
+}
+
+.sec-container-left-bottom {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  border: 1px dashed rgb(197, 197, 197);
+  border-radius: 12px;
+  padding: 20px;
+  margin-top: 3rem;
+  margin-bottom: 3rem;
+}
+
+.sec-container-left-bottom img {
+  height: 100px;
+  width: 100px;
+}
+
+.sec-container-left-bottom h1 {
+  font-size: 16px;
+}
+
+.sec-container-left-bottom p {
+  font-size: 10px;
+  color: #a1a1a1;
+}
+
+.only-btn {
+  display: flex;
+  flex-direction: column;
+}
+.Mark-btn {
+  background-color: #15803d;
+  border-radius: 8px;
+  color: white;
+  border: 0px;
+  height: 42px;
+}
+
+.sec-container-right {
+  padding: 22px;
+  background-color: white;
+  border-radius: 12px;
+  width: 350px;
+  height: 600px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+  box-shadow: 2px 2px 8px 1px rgba(189, 189, 189, 0.75);
+}
+
+.sec-container-right h1 {
+  font-size: 22px;
+}
+
+.unorder1 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.unorder1::marker {
+  color: #22c55e;
+}
+
+.unorder2 {
+  font-size: 16px;
+  margin-bottom: 4px;
+}
+
+.unorder2::marker {
+  color: #f87171;
+}
+
+.unorder3 {
+  font-size: 16px;
+  margin-bottom: 4px;
+  display:;
+}
+
+.unorder3::marker {
+  color: #3b82f6;
+}
